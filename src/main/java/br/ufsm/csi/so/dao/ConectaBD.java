@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class ConectaBD {
     private static final String DRIVER = "org.postgresql.Driver";
-    private static final String URL = "jdbc:postgresql://127.00.1:5432/teste";
+    private static final String URL = "jdbc:postgresql://127.00.1:5432/trabalho";
     private static final String USER = "postgres";
     private static final String PASS = "1234";
 

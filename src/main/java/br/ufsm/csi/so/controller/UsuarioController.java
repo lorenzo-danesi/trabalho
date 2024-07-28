@@ -11,7 +11,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
-
     @GetMapping("/listar")
     public List<Usuario> getUsuarios() {
         return new UsuarioDao().getUsuarios();

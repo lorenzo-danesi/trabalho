@@ -8,14 +8,14 @@ services:
     depends_on:
       - db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/teste
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/trabalho
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: 1234
 
   db:
     image: postgres:15
     environment:
-      POSTGRES_DB: teste
+      POSTGRES_DB: trabalho
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
     ports:

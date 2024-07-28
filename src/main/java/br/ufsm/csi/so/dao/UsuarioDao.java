@@ -2,19 +2,35 @@ package br.ufsm.csi.so.dao;
 
 import br.ufsm.csi.so.model.Usuario;
 
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UsuarioDao {
-    private List<Usuario> usuarios = new ArrayList<>();
+    //declaração das variáveis
+    private String sql;
+    private Statement statement; //usado para trazer informações do sql
+    private ResultSet resultSet;
+    private PreparedStatement preparedStatement; //usado para inserir informações no sql
+    private String status;
 
-    public UsuarioDao() {
-        usuarios.add(new Usuario(1, "João", "****"));
-        usuarios.add(new Usuario(2, "Maria", "****"));
-        usuarios.add(new Usuario(3, "Pedro", "****"));
-    }
+    public ArrayList<Usuario> getUsuarios(){
+        ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
-    public List<Usuario> getUsuarios() {
+        try (Connection connection = new ConectaBD().getConexao()){
+            this.sql = "SELECT * FROM usuario";
+            this.preparedStatement = connection.prepareStatement(this.sql);
+            this.resultSet = this.preparedStatement.executeQuery();
+            while (resultSet.next()){
+                Usuario usuario = new Usuario();
+                usuario.setId(this.resultSet.getLong("id"));
+                usuario.setNome(this.resultSet.getString("nome"));
+                usuario.setSenha(this.resultSet.getString("senha"));
+
+                usuarios.add(usuario);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
         return usuarios;
     }
 }
